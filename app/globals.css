@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --background: #b2e0e4;
+  --foreground: #171717;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* ✅ Add your brand theme here */
+  --color-livix-deep: #005b6e; /* Deep water blue */
+  --color-livix-aqua: #b2e0e4; /* Aqua accent */
+  --color-livix-light: #e6f7fa; /* Light background tint */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
