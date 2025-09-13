@@ -5,7 +5,7 @@ import HydrationSection from "./components/Hydration";
 import MaintenancePage from "./components/MaintenancePage";
 import Navbar from "./components/Navbar";
 import ProductsSection from "./components/Products";
-import BrandsSection from "./components/Responsibility";
+import Responsibility from "./components/Responsibility";
 
 export default function Home() {
   const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
@@ -20,7 +20,7 @@ export default function Home() {
       <Hero />
       <ProductsSection />
       <HydrationSection />
-      <BrandsSection />
+      <Responsibility />
       <Footer />
     </>
   );
