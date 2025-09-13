@@ -14,13 +14,31 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Livix Water LLP - Pure Mineral Water",
   description:
-    "Official website of Livix Water LLP, a leading mineral water brand in surat near kamrej, jokha village.",
+    "Official website of Livix Water LLP, a leading mineral water brand in Surat near Kamrej, Jokha village.",
+  icons: {
+    // Standard favicon for browsers
+    icon: "/assets/logo.svg",
+
+    // Shortcut icon (used in some browsers as an alternative)
+    shortcut: "/assets/logo.svg",
+
+    // Apple touch icon (iOS home screen)
+    apple: "/assets/logo.svg",
+
+    // Optional: mask icon for Safari pinned tabs (SVG)
+    mask: "/assets/logo.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        cz-shortcut-listen="false"
+      >
+        {children}
+      </body>
     </html>
   );
 }
