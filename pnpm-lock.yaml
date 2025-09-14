@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@netlify/plugin-nextjs':
-        specifier: ^5.13.2
-        version: 5.13.2
       framer-motion:
         specifier: ^12.23.12
         version: 12.23.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -27,6 +24,9 @@ importers:
         specifier: ^5.5.0
         version: 5.5.0(react@19.1.0)
     devDependencies:
+      '@netlify/plugin-nextjs':
+        specifier: ^5.13.2
+        version: 5.13.2
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.1.12
