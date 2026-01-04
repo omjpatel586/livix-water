@@ -3,12 +3,17 @@ const express = require("express");
 const http = require("http");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(cors({ origin: "*" }));
+
+// Body Parser
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 // Environment Variables
 const PORT = process.env.PORT || 3000;
