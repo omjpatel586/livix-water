@@ -5,7 +5,6 @@ const nodemailer = require("nodemailer");
 const cors = require("cors");
 
 const app = express();
-const server = http.createServer(app);
 
 // Middleware
 app.use(express.json());
@@ -28,6 +27,10 @@ const transporter = nodemailer.createTransport({
     user: SMTP_USER,
     pass: SMTP_PASS,
   },
+});
+
+app.get("/", (req, res) => {
+  res.send("Email server is running!");
 });
 
 // POST API: Inquiry Mail Send
@@ -77,6 +80,8 @@ app.post("/inquiry/mail/send", async (req, res) => {
   }
   return res.status(200).json({ message: "Mail sent successfully" });
 });
+
+const server = http.createServer(app);
 
 // Start Server
 server.listen(PORT, () => {
