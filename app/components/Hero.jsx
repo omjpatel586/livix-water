@@ -28,7 +28,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            Livix Water LLP brings you premium mineral water with unmatched purity and taste.
+            Livix Pure Water LLP brings you premium mineral water with unmatched purity and taste.
           </motion.p>
 
           <motion.div
@@ -44,8 +44,8 @@ export default function Hero() {
               Explore Brands
             </a>
             <a
-              href="/contact"
-              className="px-6 py-3 bg-brand-darkblue text-black font-semibold rounded-full shadow-md hover:bg-brand-blue transition"
+              href="/get-in-touch"
+              className="px-6 py-3 bg-white text-black font-semibold rounded-full shadow-md hover:bg-gray-100 transition"
             >
               Contact Us
             </a>

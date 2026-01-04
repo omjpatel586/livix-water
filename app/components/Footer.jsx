@@ -34,8 +34,8 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-brand-lightblue transition-colors">
-                Contact Us
+              <Link href="/get-in-touch" className="hover:text-brand-lightblue transition-colors">
+                Get In Touch
               </Link>
             </li>
           </ul>
@@ -43,7 +43,7 @@ export default function Footer() {
 
         {/* Contact Info / Social */}
         <div className="space-y-2">
-          <h4 className="text-lg font-semibold mb-3">Contact</h4>
+          <h4 className="text-lg font-semibold mb-3">Get In Touch With Us</h4>
           <Link
             href="mailto:contact@livixwater.com"
             className="block text-sm hover:text-brand-lightblue"
@@ -77,7 +77,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="mt-4 text-center text-xs text-gray-600">
-        &copy; {new Date().getFullYear()} Livix Water LLP. All Rights Reserved.
+        &copy; {new Date().getFullYear()} Livix Pure Water LLP. All Rights Reserved.
       </div>
     </footer>
   );

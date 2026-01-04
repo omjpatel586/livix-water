@@ -1,9 +1,7 @@
 "use client";
-import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import HydrationSection from "./components/Hydration";
 import MaintenancePage from "./components/MaintenancePage";
-import Navbar from "./components/Navbar";
 import ProductsSection from "./components/Products";
 import Responsibility from "./components/Responsibility";
 
@@ -16,12 +14,10 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
       <Hero />
       <ProductsSection />
       <HydrationSection />
       <Responsibility />
-      <Footer />
     </>
   );
 }
