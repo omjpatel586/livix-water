@@ -17,17 +17,18 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 // Environment Variables
 const PORT = process.env.PORT || 3000;
-const SMTP_HOST = process.env.SMTP_HOST || "smtpout.secureserver.net"; // Default GoDaddy host
+// const SMTP_HOST = process.env.SMTP_HOST || "smtpout.secureserver.net"; // Default GoDaddy host
 const SMTP_PORT = process.env.SMTP_PORT || 465;
+const SMTP_SERVICE = process.env.SMTP_SERVICE;
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
+const SEND_MAIL_TO = process.env.SEND_MAIL_TO;
 const DEV_EMAIL = process.env.DEV_EMAIL; // Developer email for error notifications
 
-// Setup Nodemailer Transporter (GoDaddy/Custom Service)
 const transporter = nodemailer.createTransport({
-  host: SMTP_HOST,
+  service: SMTP_SERVICE,
   port: SMTP_PORT,
-  secure: SMTP_PORT == 465, // true for 465, false for other ports
+  secure: false, // Must be false for port 587
   auth: {
     user: SMTP_USER,
     pass: SMTP_PASS,
@@ -44,8 +45,9 @@ app.post("/inquiry/mail/send", async (req, res) => {
 
   // Email content for the admin
   const mailOptions = {
-    from: email,
-    to: SMTP_USER,
+    from: SMTP_USER,
+    to: SEND_MAIL_TO,
+    replyTo: email,
     subject: `New Inquiry from ${name}`,
     html: `
       <h3>New Inquiry Received</h3>
@@ -58,7 +60,7 @@ app.post("/inquiry/mail/send", async (req, res) => {
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`[SUCCESS] Mail sent successfully to ${ADMIN_EMAIL}`);
+    console.log(`[SUCCESS] Mail sent successfully to ${SEND_MAIL_TO}`);
   } catch (error) {
     // Log error so PM2 captures it
     console.error(`[ERROR] Failed to send mail: ${error.message}`);
