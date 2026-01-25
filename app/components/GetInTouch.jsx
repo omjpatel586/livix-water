@@ -1,26 +1,43 @@
 "use client";
 
+import axios from "axios";
 import { useState } from "react";
 
-export default function GetInTouch() {
+export default function GetInTouch({ baseUrl }) {
   const [formData, setFormData] = useState({
     name: "",
     address: "",
-    mobile: "",
+    mobileNumber: "",
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const submitMail = async () => {
+    return await axios.post(`${baseUrl}/inquiry/mail/send`, formData);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 1. Prevent multiple triggers if already loading
+    if (loading) return;
+
     // Handle form submission logic here
-    console.log("Form Data:", formData);
-    alert("Thank you! We will get in touch shortly.");
+    setLoading(true);
+    const response = await submitMail();
+
+    if (response.status === 200) {
+      alert("Thank you! We will get in touch shortly.");
+      setLoading(false);
+    } else {
+      alert("Something went wrong! Please try after some time.");
+    }
   };
 
   return (
@@ -140,7 +157,7 @@ export default function GetInTouch() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white placeholder:text-slate-400"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white placeholder:text-slate-400 text-black"
                     placeholder="Enter Name"
                   />
                 </div>
@@ -149,13 +166,12 @@ export default function GetInTouch() {
                     Mobile Number
                   </label>
                   <input
-                    type="tel"
+                    type="text"
                     id="mobile"
                     name="mobile"
-                    value={formData.mobile}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white placeholder:text-slate-400"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white placeholder:text-slate-400 text-black"
                     placeholder="Enter Mobile Number"
                   />
                 </div>
@@ -171,7 +187,7 @@ export default function GetInTouch() {
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white placeholder:text-slate-400"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white placeholder:text-slate-400 text-black"
                   placeholder="Street, Area, City"
                 />
               </div>
@@ -187,7 +203,7 @@ export default function GetInTouch() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white placeholder:text-slate-400"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white placeholder:text-slate-400 text-black"
                   placeholder="Enter Email"
                 />
               </div>
@@ -203,7 +219,7 @@ export default function GetInTouch() {
                   onChange={handleChange}
                   rows="4"
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white resize-none placeholder:text-slate-400"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-gray-50 focus:bg-white resize-none placeholder:text-slate-400 text-black"
                   placeholder="Tell us about your requirement..."
                 ></textarea>
               </div>
@@ -212,7 +228,33 @@ export default function GetInTouch() {
                 type="submit"
                 className="w-full bg-brand-blue text-white font-bold py-4 px-8 rounded-lg bg-livix-deep transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer hover:bg-slate-200 hover:text-black"
               >
-                Send Message
+                {loading ? (
+                  <>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  "Send Message"
+                )}
               </button>
             </form>
           </div>

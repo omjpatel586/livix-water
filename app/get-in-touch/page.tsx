@@ -1,5 +1,7 @@
 import GetInTouch from "../components/GetInTouch";
 
 export default function GetInTouchPage() {
-  return <GetInTouch />;
+  const baseUrl = process.env.BASE_URL;
+
+  return <GetInTouch baseUrl={baseUrl} />;
 }
